@@ -1,7 +1,7 @@
 package br.com.weaponmanagement.persistence.entity;
 
 import jakarta.persistence.*;
-
+import jakarta.validation.constraints.Email;
 import lombok.*;
 
 import java.util.function.Function;
@@ -12,23 +12,22 @@ import java.util.function.Function;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tb_weapon")
-public class Weapon {
+@Table(name = "tb_user")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "tipo", nullable = false)
-    private String tipo;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Column(name = "patrimonio", nullable = false)
-    private String patrimonio;
+    @Column(name = "email", nullable = false)
+    @Email(message =" O e-mail deve ser valido")
+    private String email;
 
-    public <R> R map(Function<Weapon, R> func){
+    public <R> R map(Function<User, R> func){
         return func.apply(this);
     }
-
-
 }
